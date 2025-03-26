@@ -33,6 +33,6 @@ public class FitnessApp implements CommandLineRunner {
         bookingService.bookClass("u1", "c1");
         bookingService.bookClass("u2", "c1");
         bookingService.cancelBooking("u1", "c1");
-
+        //todo test
     }
 }
