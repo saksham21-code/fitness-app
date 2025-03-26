@@ -3,7 +3,9 @@ package main.java.service;
 
 import exceptions.BookingException;
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import main.java.enums.Tier;
 import main.java.model.FitnessClass;
 import main.java.model.User;
@@ -23,6 +25,7 @@ import java.util.Map;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
+@Slf4j
 public class BookingService{
     UserService userService;
     ClassService classService;
@@ -54,7 +57,7 @@ public class BookingService{
             if (fc.attendees.size() < fc.capacity) {
                 fc.attendees.add(userId);
                 user.bookedClasses.add(classId);
-                System.out.println("Booking successful.");
+                log.info("Booking successful.");
             } else {
                 waitlistHandler.addToWaitlist(user, fc);
             }
@@ -73,7 +76,7 @@ public class BookingService{
         try {
             fc.attendees.remove(userId);
             user.bookedClasses.remove(classId);
-            System.out.println("Cancelled successfully.");
+            log.info("Cancelled successfully.");
             waitlistHandler.promoteFromWaitlist(fc, classId);
         } finally {
             fc.lock.unlock();
