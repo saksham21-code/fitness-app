@@ -1,5 +1,6 @@
 package main;
 
+import enums.FitnessClassType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,11 +29,10 @@ public class FitnessApp implements CommandLineRunner {
         userService.register("u1", "Alice", main.java.enums.Tier.GOLD);
         userService.register("u2", "Bob", main.java.enums.Tier.SILVER);
 
-        classService.createClass("c1", "Yoga", 1, LocalDateTime.now().plusHours(1));
+        classService.createClass("c1", FitnessClassType.YOGA, 1, LocalDateTime.now().plusHours(1));
 
         bookingService.bookClass("u1", "c1");
         bookingService.bookClass("u2", "c1");
         bookingService.cancelBooking("u1", "c1");
-        //todo test
     }
 }
